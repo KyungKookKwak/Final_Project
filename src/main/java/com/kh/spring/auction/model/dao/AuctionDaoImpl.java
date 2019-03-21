@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.auction.model.vo.Auction;
-import com.kh.spring.thing.model.vo.CategoryMacro;
+import com.kh.spring.category.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.Product;
 
 @Repository

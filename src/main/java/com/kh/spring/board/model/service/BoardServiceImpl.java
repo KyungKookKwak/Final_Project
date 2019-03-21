@@ -17,13 +17,13 @@ import com.kh.spring.board.model.vo.Board;
 public class BoardServiceImpl implements BoardService {
 
 	Logger logger = Logger.getLogger(getClass());
-	
+
 	@Autowired
 	BoardDao boardDao;
 
 	@Override
 	public List<Map<String, String>> selectBoardList(int cPage, int numPerPage) {
-		return boardDao.selectBoardList(cPage , numPerPage);
+		return boardDao.selectBoardList(cPage, numPerPage);
 	}
 
 	@Override
@@ -32,31 +32,30 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	@Transactional(rollbackFor=Exception.class)
+	@Transactional(rollbackFor = Exception.class)
 	public int insertBoard(Board board, List<Attachment> attachList) {
 		int result = 0;
 		int boardNo = 0;
-		
-		//1. 게시판 테이블 등록
+
+		// 1. 게시판 테이블 등록
 		result = boardDao.insertBoard(board);
 		boardNo = board.getBoardNo();
-		logger.debug("boardNo ="+boardNo);
-		
-		if(result==0) {
+		logger.debug("boardNo =" + boardNo);
+
+		if (result == 0) {
 			throw new BoardException("게시판 등록 오퓨");
 		}
-		//2. 첨부파일 테이블 등록
-		if(attachList.size()>0) {
-			for(Attachment a : attachList) {
-				//fk boardNo 셋팅
+		// 2. 첨부파일 테이블 등록
+		if (attachList.size() > 0) {
+			for (Attachment a : attachList) {
+				// fk boardNo 셋팅
 				a.setBoardNo(boardNo);
 				result = boardDao.insertAttachment(a);
-				if(result==0) {
+				if (result == 0) {
 					throw new BoardException("첨부파일 등록 오류");
 				}
 			}
 		}
-		
 		return boardNo;
 	}
 
@@ -70,9 +69,4 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectList(boardNo);
 	}
 
-	@Override
-	public int selectCountBoard() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

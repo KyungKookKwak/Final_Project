@@ -153,6 +153,5 @@ public class CustomerDaoImpl implements CustomerDao {
 		return result;
 	}
 
-
 	
 }

@@ -33,9 +33,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.auction.model.service.AuctionService;
 import com.kh.spring.auction.model.vo.Auction;
+import com.kh.spring.category.model.vo.CategoryMacro;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.service.ThingService;
-import com.kh.spring.thing.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.Order;
 import com.kh.spring.thing.model.vo.Product;
 
@@ -79,13 +79,8 @@ public class AuctionController {
 
 		// 업로드할 파일 이름
 		String org_filename = file.getOriginalFilename();
-		// String str_filename = uuid.toString() + org_filename;
-
-//		System.out.println("원본 파일명 : " + org_filename);
-//		System.out.println("저장할 파일명 : " + str_filename);
 		
 		String filepath = realFolder + "\\" + org_filename;
-//		System.out.println("파일경로 : " + filepath);
 
 		File f = new File(filepath);
 		if (!f.exists()) {
@@ -114,11 +109,9 @@ public class AuctionController {
 		auc.setSeqMemberNo(m.getSeqMemberNo());
 		auc.setAuctionPhone(m.getMemberPhone());
 		String auctionTitle = auc.getAuctionTitle();
-		// auc.setAuctionTitle(new String(auctionTitle.getBytes("8859_1"),"utf-8"));
 		auc.setAuctionTitle(auctionTitle);
 		
 		String auctionDetail = auc.getAuctiondetail();
-		// auc.setAuctiondetail(new String(auctionDetail.getBytes("8859_1"),"utf-8"));
 		auc.setAuctiondetail(auctionDetail);
 				
 		MultipartFile file;
@@ -139,16 +132,6 @@ public class AuctionController {
 
 		Iterator<Entry<String, MultipartFile>> itr = files.entrySet().iterator();
 
-		/*
-		 * 
-		 * MultipartFile 의 주요 메소드는 String getName()파라미터 이름을 구한다. String
-		 * getOriginalFilename()업로드 한 파일의 실제!! 이름을 구한다. boolean isEmpty()업로드 한
-		 * 파일이 존재하지 않는 경우 true를 리턴 한다. long getSize()업로드한 파일의 크기를 구한다. byte[]
-		 * getBytes() throws IOException업로드 한 파일 데이터를 구한다. --> 이걸로 파일 쓰면된다.
-		 * InputStream getInputStream()InputStrem을 구한다. void transferTo(File
-		 * dest)업로드 한 파일 데이터를 지정한 파일에 저장한다. --> 요고도 파일쓰는거다.
-		 */
-
 		String filename = "";
 
 		while (itr.hasNext()) {
@@ -166,16 +149,12 @@ public class AuctionController {
 		
 		for(int i=0;i<filelist.length;i++){
 			if(i==0){
-				// auc.setAuctionImageMain(new String(filelist[i].getBytes("8859_1"),"utf-8"));
 				auc.setAuctionImageMain(filelist[i]);
 			}else if(i==1){
-				// auc.setAuctionImageSub1(new String(filelist[i].getBytes("8859_1"),"utf-8"));
 				auc.setAuctionImageSub1(filelist[i]);
 			}else if(i==2){
-				// auc.setAuctionImageSub2(new String(filelist[i].getBytes("8859_1"),"utf-8"));
 				auc.setAuctionImageSub2(filelist[i]);
 			}else{
-				// auc.setAuctionImageSub3(new String(filelist[i].getBytes("8859_1"),"utf-8"));
 				auc.setAuctionImageSub3(filelist[i]);
 			}
 		}
@@ -196,23 +175,15 @@ public class AuctionController {
 			String new_std = new_frm.format(std);
 			String new_end = new_frm.format(end);
 
-			
 			// 테스트를 하기위한 시간설정이 필요하다.
 			auc.setSdate(new_std);
 			auc.setEdate(new_end);
-			System.out.println("std = "+new_std+"  end = "+new_end);
-			// 지금 테스트를 하기위해 설정을 해보도록 하겠다. 
-			
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		
-		
 		int result = 0;
-		System.out.println("인코딩설정 및 가져온 auc : "+auc);
 		
 		try {
 			result = auctionService.insertAuctionRegist(auc);
@@ -220,7 +191,6 @@ public class AuctionController {
 		} catch (Exception e) {
 			map.put("cnt", 0);
 			e.printStackTrace();
-			System.out.println("익셉션에 걸립니까?");
 			return map;
 		}
 		
@@ -229,16 +199,13 @@ public class AuctionController {
 			cnt = cnt + 1;
 		}
 		
-
 		map.put("cnt", cnt);
 		
-		System.out.println("제대로 리턴을 시킵니까?");
 		return map;
 	}
 	
 	@RequestMapping("/auctionDetail.do")
 	public String auctionDetail(Model model , HttpSession session , @RequestParam(value="auctionNo") int auctionNo) {
-		System.out.println("auctionNo = "+auctionNo);
 		List<Map<String,String>> auction = auctionService.selectAuction(auctionNo);
 		String ctgMacroName = auctionService.selectCtgMacroName(auction.get(0).get("AUCTION_CATEGORY_MACRO"));
 		
@@ -254,11 +221,8 @@ public class AuctionController {
 		
 		String ctgMicroName = auctionService.selectCtgMicroName(ctg);
 		
-		System.out.println("ctgMacroName = "+ctgMacroName+"/ ctgMicroName = "+ctgMicroName);
-		
 		// 현재 입찰가를 뿌려주기위하여 DB다녀와야 한다.
 		Map<String , Object> history = auctionService.selectAuctionHistory(String.valueOf(auction.get(0).get("AUCTION_NO")));
-		System.out.println("history = "+history);
 		
 		// 본인이 현재 입찰중인가에 대해 뿌려주기 위하여 DB다녀와야 한다.
 		Map<String , Object> temp = new HashMap<>();
@@ -270,7 +234,6 @@ public class AuctionController {
 			temp.put("AuctionNo" , auction.get(0).get("AUCTION_NO"));
 			
 			myHistory = auctionService.selectMyHistory(temp);			
-			System.out.println("myHistory = "+myHistory);
 		}
 
 		// 현재 그 글에대해서 입찰 중인데 그가격이 최대라면 입찰 하지 못하게 끔 하는 쿼리
@@ -281,7 +244,6 @@ public class AuctionController {
 				bidCheck.put("check" , "N");
 				if(String.valueOf(myHistory.get("MEMBER_NO")).equals(String.valueOf(m.getSeqMemberNo()))) {
 					bidCheck.put("check" , "Y");
-					System.out.println("니가 최대 입찰자야");
 				}				
 			}
 		}
@@ -326,8 +288,6 @@ public class AuctionController {
 	public Map<String, Object> auctionBid(@RequestParam(value="auctionNo" , required=false) int auctionNo , 
 			HttpServletResponse response, Model model, HttpServletRequest request,HttpSession session ) {
 		Map<String, Object> map = new HashMap<String, Object>();	// 결과 값 넘길 맵
-		
-		System.out.println("여기 안오죠????????????????????????");
 		
 		Member m = (Member)session.getAttribute("memberLoggedIn");
 		Map<String , Object> temp = new HashMap<>();
@@ -406,8 +366,6 @@ public class AuctionController {
 		// auction 테이블의 auction_check컬럼의 값을 Y로 바꾼다.
 		// auction_history테이블의 winning_bid컬럼의 값을 Y로 바꾼다.
 		
-		// thingService.updateOnSale(nProductNo);
-
 		Map<String , Object> temp1 = new HashMap<>();
 		temp1.put("memberNo", m.getSeqMemberNo());
 		temp1.put("auctionNo", nProductNo);
@@ -450,16 +408,12 @@ public class AuctionController {
 				temp.put("memberId" , memberId);
 				temp.put("auctionNo" , auctionNo);
 				List<Map<String,String>> checkList = auctionService.checkHistory(temp);
-
-				
-				
 				
 				if(checkList.size() == 0) {
 					result.put(String.valueOf("check"+i), "N");
 				} else {
 					result.put(String.valueOf("check"+i), "Y");
 				}
-				
 			}	
 		} else {
 			for(int i = 1;i <= auctionCount;i++) {
@@ -480,21 +434,14 @@ public class AuctionController {
 				price = String.valueOf(resultTemp.get("PRICE"));
 			}
 			
-			System.out.println("priceeeeeeeeeee"+price);
 			resultPrice.put(String.valueOf("Price"+i), price);
 		}
-		
-		
-
 		
 		String brandNew = "Y";
 
 		mav.addObject("resultPrice" , resultPrice);
 		mav.addObject("result" , result);
 		mav.addObject("auctionList" , list);
-		
-		
-		
 		mav.addObject("brandNew", brandNew);
 		mav.setViewName("auction/auctionItem");
 		

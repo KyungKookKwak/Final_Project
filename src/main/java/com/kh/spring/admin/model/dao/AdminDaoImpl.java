@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.auction.model.vo.Auction;
+import com.kh.spring.category.model.vo.Category;
+import com.kh.spring.category.model.vo.CategoryMacro;
 import com.kh.spring.member.model.vo.Member;
-import com.kh.spring.thing.model.vo.Category;
-import com.kh.spring.thing.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.ProductIo;
 import com.kh.spring.thing.model.vo.Regist;
 
@@ -315,39 +315,5 @@ public class AdminDaoImpl implements AdminDao {
 	public List<Map<String, Object>> questionCategory() {
 		return sqlSession.selectList("admin.questionCategory");
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-
-	
-
-	
-	
-
-	
-	
-
-
-	
-
-
-
-	
-
-	
 
 }

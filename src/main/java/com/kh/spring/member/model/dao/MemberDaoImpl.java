@@ -33,44 +33,37 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public List<Map<String, String>> selectAllCategory() {
 		List<Map<String,String>> list = sqlSession.selectList("system.selectAllCategory");
-		System.out.println(list);
 		return list;
 	}
 
 	@Override
 	public int insertFaceBookMember(Member m) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("member.insertFaceBookMember" , m);
 	}
 
 	@Override
 	public Member selectOneFBMember(String fbIdcheck) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("member.selectOneMember", fbIdcheck);
 	}
 
 	@Override
 	public Member selectOnekakaoMember(String kIdcheck) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("member.selectOneMember",kIdcheck);
 	}
 
 	@Override
 	public int insertKakaoMember(Member m) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("member.insertKakaoMember" , m);
 	}
 
 	@Override
 	public int insertgoogleMember(Member m) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("member.insertgoogleMember",m);
 		
 	}
 
 	@Override
 	public Member selectOnegoogleMember(String gIdcheck) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("member.selectOneMember",gIdcheck);
 	}
 
@@ -105,7 +98,5 @@ public class MemberDaoImpl implements MemberDao {
 	public int updateItr(Map<String, String> map) {
 		return sqlSession.update("member.updateItr", map);
 	}
-
-	
 
 }

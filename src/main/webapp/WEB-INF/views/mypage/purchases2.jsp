@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="" name="pageTitle" />
+	<jsp:param value="Get It :: 마이페이지" name="pageTitle" />
 </jsp:include>
 <style>
 .mypage{
@@ -68,7 +68,7 @@
 								<div class="lDesc">
 									<span>${b.AUCTION_TITLE }</span><br />
 									<span>${b.AUCTION_PRICE } 원</span> <br />
-									<span><fmt:formatDate value="${b.EDATE}" pattern="yyyy.MM.dd" /></span> <br />
+									<span>${b.EDATE}</span> <br />
 								</div>
 						</div>	
 					</c:forEach>

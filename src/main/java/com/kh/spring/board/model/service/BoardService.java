@@ -18,5 +18,4 @@ public interface BoardService {
 
 	List<Attachment> selectList(int boardNo);
 
-	int selectCountBoard();
 }

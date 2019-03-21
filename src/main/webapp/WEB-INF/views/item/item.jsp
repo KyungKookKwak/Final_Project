@@ -10,61 +10,7 @@
 </jsp:include>
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
-<style>
-.content-container{
-	height: 100%;
-}
-.productOne, .auctionOne{
-	width: 250px;
-	height: 250px;
-	text-align: center;
-	display: inline-block;
-	margin: 10px 31px;
-}
-.productOne:hover, .auctionOne:hover{
-	border-radius: 5px;
-	box-shadow: 3px 3px 5px 7px lightgray;
-	cursor: pointer;
-}
-.noProduct{
-	text-align: center;
-	font-size: 30px;
-	margin-top: 20%;
-}
-.pImg{
-	margin-top: 5px;
-	width: 250px;
-	height: 180px;
-}
-.category-box>h2{
-	margin-left: 30px;
-	font-family: 'Do Hyeon', sans-serif;
-}
-.category-name{
-	padding-left: 60px;
-}
-.category-name span{
-	font-size: 20px;
-	font-family: 'Jua', sans-serif;
-}
-#enrollItr{
-	border: none;
-	border-radius: 5px;
-	background-color: orange;
-	animation-name: myani2;
-    animation-duration: .5s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-@Keyframes myani2{
-	0%{
-		transform: rotate(15deg);
-	}
-	100%{
-		transform: rotate(-15deg);
-	}
-}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/item.css" />
 <c:forEach items="${allCategory }" var="ct">
 	<c:if test="${ct.CATEGORY_MACRO == aiKey.caKey }">
 		<c:set var="nowCategory" value="${ct.CATEGORY_MACRO_NAME }" />

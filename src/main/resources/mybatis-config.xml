@@ -13,9 +13,7 @@
 	
 	<!-- 실제데이터의 타입을 풀패키지로 적어주어야 한다. 그것을 위한 별칭처리 -->
 	<typeAliases>
-		<typeAlias type="com.kh.spring.demo.model.vo.Dev" alias="dev"/>
 		<typeAlias type="com.kh.spring.member.model.vo.Member" alias="m"/>		
-		<typeAlias type="com.kh.spring.memo.model.vo.Memo" alias="memo"/>		
 		<typeAlias type="com.kh.spring.common.typehandler.StringArrayTypeHandler" alias="strArrTypeHandler"/>
 		<typeAlias type="com.kh.spring.board.model.vo.Board" alias="board"/>
 		<typeAlias type="com.kh.spring.customercenter.model.vo.Board" alias="cc"/>
@@ -23,10 +21,9 @@
 		<typeAlias type="com.kh.spring.board.model.vo.Attachment" alias="attachment"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.Product" alias="product"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.ProductIo" alias="productIo"/>
-		<typeAlias type="com.kh.spring.thing.model.vo.Category" alias="category"/>
+		<typeAlias type="com.kh.spring.category.model.vo.Category" alias="category"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.Regist" alias="regist"/>
-		<typeAlias type="com.kh.spring.thing.model.vo.CategoryMacro" alias="categoryMacro"/>
-		<typeAlias type="com.kh.spring.thing.model.vo.ProductAsk" alias="productAsk"/>
+		<typeAlias type="com.kh.spring.category.model.vo.CategoryMacro" alias="categoryMacro"/>
 		<typeAlias type="com.kh.spring.auction.model.vo.Auction" alias="auction"/>
 		<typeAlias type="com.kh.spring.basket.model.vo.Basket" alias="basket"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.Order" alias="order"/>

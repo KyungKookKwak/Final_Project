@@ -18,36 +18,23 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Override
 	public int updatephone(Member m) {
-		int result = 0;
-		result = myPageDao.updatephone(m);
-		return result;
+		return myPageDao.updatephone(m);
 	}
 
 	@Override
 	public int updateemail(Member m) {
-		int result = 0;
-		result = myPageDao.updateemail(m);
-		return result;
+		return myPageDao.updateemail(m);
 	}
 
-	/*
-	 * @Override public List<Map<String, Object>> sellList(int seqMemberNo) {
-	 * List<Map<String, Object>> list = myPageDao.sellList(seqMemberNo); return
-	 * list; }
-	 * 
-	 * @Override public List<Map<String, Object>> sellList2(int seqMemberNo) {
-	 * List<Map<String, Object>> list = myPageDao.sellList2(seqMemberNo); return
-	 * list; }
-	 */
 	@Override
 	public List<Map<String, Object>> sellList(int cPage, int numPerPage, int seqMemberNo) {
-		List<Map<String, Object>> list = myPageDao.sellList(seqMemberNo,cPage,numPerPage);
+		List<Map<String, Object>> list = myPageDao.sellList(seqMemberNo, cPage, numPerPage);
 		return list;
 	}
 
 	@Override
 	public List<Map<String, Object>> sellList2(int cPage, int numPerPage, int seqMemberNo) {
-		List<Map<String, Object>> list = myPageDao.sellList2(seqMemberNo,cPage,numPerPage);
+		List<Map<String, Object>> list = myPageDao.sellList2(seqMemberNo, cPage, numPerPage);
 		return list;
 	}
 
@@ -55,13 +42,14 @@ public class MyPageServiceImpl implements MyPageService {
 	public int countproduct(int seqMemberNo) {
 		return myPageDao.countproduct(seqMemberNo);
 	}
+
 	public int countproduct2(int seqMemberNo) {
 		return myPageDao.countproduct2(seqMemberNo);
 	}
-	
+
 	@Override
 	public List<Map<String, Object>> sellList3(int cPage, int numPerPage, int seqMemberNo) {
-		List<Map<String, Object>> list = myPageDao.sellList3(seqMemberNo,cPage,numPerPage);
+		List<Map<String, Object>> list = myPageDao.sellList3(seqMemberNo, cPage, numPerPage);
 		return list;
 	}
 
@@ -71,8 +59,8 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public List<Map<String, Object>> buyList(int cPage, int numPerPage,int seqMemberNo) {
-		List<Map<String, Object>> list = myPageDao.buyList(cPage,numPerPage,seqMemberNo);
+	public List<Map<String, Object>> buyList(int cPage, int numPerPage, int seqMemberNo) {
+		List<Map<String, Object>> list = myPageDao.buyList(cPage, numPerPage, seqMemberNo);
 		return list;
 	}
 
@@ -80,10 +68,10 @@ public class MyPageServiceImpl implements MyPageService {
 	public int countbuy(int seqMemberNo) {
 		return myPageDao.countbuy(seqMemberNo);
 	}
-	
+
 	@Override
-	public List<Map<String, Object>> abuyList(int cPage, int numPerPage,int seqMemberNo) {
-		List<Map<String, Object>> list = myPageDao.abuyList(cPage,numPerPage,seqMemberNo);
+	public List<Map<String, Object>> abuyList(int cPage, int numPerPage, int seqMemberNo) {
+		List<Map<String, Object>> list = myPageDao.abuyList(cPage, numPerPage, seqMemberNo);
 		return list;
 	}
 
@@ -94,10 +82,9 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Override
 	public int updateaddress(Member m) {
-		int result = 0;
-		result = myPageDao.updateaddress(m);
-		return result;
-	}	
+		return myPageDao.updateaddress(m);
+	}
+
 	@Override
 	public List<Map<String, Object>> coupons(int memberNo) {
 		return myPageDao.coupons(memberNo);

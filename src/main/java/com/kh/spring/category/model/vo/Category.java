@@ -1,4 +1,4 @@
-package com.kh.spring.thing.model.vo;
+package com.kh.spring.category.model.vo;
 
 public class Category {
 	private int categoryMicro;

@@ -11,7 +11,7 @@
       <param-value>
          /WEB-INF/spring/root-context.xml
          <!-- #7.1 Spring Security 설정파일 등록 -->
-         /WEB-INF/spring/security-context.xml         
+         /WEB-INF/spring/security-context.xml
       </param-value>
    </context-param>
    
@@ -78,9 +78,9 @@
   	</filter-mapping>
   	
   	<!-- 공용에러페이지 등록 -->
-  	<!-- <error-page>
+  	<error-page>
   		<location>/WEB-INF/views/common/error.jsp</location>
-  	</error-page> -->
+  	</error-page>
   	
   	
 </web-app>

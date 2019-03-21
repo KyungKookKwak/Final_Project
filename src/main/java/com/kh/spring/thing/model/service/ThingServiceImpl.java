@@ -7,8 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spring.category.model.vo.Category;
 import com.kh.spring.thing.model.dao.ThingDao;
-import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.Order;
 import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.Regist;
