@@ -12,6 +12,7 @@ import com.kh.spring.thing.model.vo.Regist;
 
 @Repository
 public class CategoryDaoImpl implements CategoryDao {
+	
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
@@ -21,20 +22,16 @@ public class CategoryDaoImpl implements CategoryDao {
 		return sqlSession.selectList("regist.laptopPcEnd");
 	}
 
-
 	@Override
 	public List<Map<String, String>> selectMacro() {
 		return sqlSession.selectList("product.selectAll");
 	}
 
-
 	@Override
 	public List<String> MainAuctionSelect() {
-		sqlSession.selectList("auction.MainAuctionSelect");
-		List<String> list = null;
+		List<String> list = sqlSession.selectList("auction.MainAuctionSelect");
 		return list;
 	}
-
 
 	@Override
 	public List<Product> selectByCategory(Map<String, String> map) {

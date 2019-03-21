@@ -17,8 +17,6 @@ public interface MemberService {
 
 	List<Map<String, String>> selectAllCategory();
 
-	int insertMember(ModelAndView mav);
-
 	int insertFacebookMember(Member m);
 
 	Member selectOneFBMember(String fbIdcheck);

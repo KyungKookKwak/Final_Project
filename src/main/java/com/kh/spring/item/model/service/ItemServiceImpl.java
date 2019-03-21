@@ -10,14 +10,13 @@ import org.springframework.stereotype.Service;
 import com.kh.spring.item.model.dao.ItemDao;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
-import com.kh.spring.thing.model.vo.ProductAsk;
 import com.kh.spring.thing.model.vo.Regist;
 
 @Service
 public class ItemServiceImpl implements ItemService {
 
 	Logger logger = Logger.getLogger(getClass());
-	
+
 	@Autowired
 	ItemDao itemDao;
 
@@ -29,11 +28,6 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public Member selectJoinMember(int sellerNo) {
 		return itemDao.selectJoinMember(sellerNo);
-	}
-
-	@Override
-	public int insertAsk(ProductAsk pAsk) {
-		return itemDao.insertAsk(pAsk);
 	}
 
 	@Override
@@ -67,11 +61,6 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ProductAsk> selectAskAll(int productNo) {
-		return itemDao.selectAskAll(productNo);
-	}
-
-	@Override
 	public List<Product> selectUpItems() {
 		return itemDao.selectUpItems();
 	}
@@ -85,10 +74,10 @@ public class ItemServiceImpl implements ItemService {
 	public String selectMemberInterest(int memberNo) {
 		return itemDao.selectMemberInterest(memberNo);
 	}
-	@Override	
+
+	@Override
 	public List<Map<String, Object>> couponList(String buyerNo) {
-	return itemDao.couponList(buyerNo);
+		return itemDao.couponList(buyerNo);
 	}
 
-	
 }

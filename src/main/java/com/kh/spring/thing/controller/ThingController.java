@@ -22,172 +22,155 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.board.model.exception.BoardException;
+import com.kh.spring.category.model.vo.Category;
 import com.kh.spring.common.util.Utils;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.service.ThingService;
-import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.Order;
 import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.Regist;
 
 @Controller
 public class ThingController {
-	
+
 	Logger logger = Logger.getLogger(getClass());
-	
+
 	@Autowired
 	ThingService thingService;
-	
-	
+
 	@RequestMapping("/thing/thing.do")
 	public ModelAndView thingView(ModelAndView mav) {
 		List<Category> categoryList = new ArrayList<>();
-		
+
 		categoryList = thingService.selectCategorys();
-		
-		System.out.println("ThingController@categoryList="+categoryList);
-		
+
 		mav.addObject("categoryList", categoryList);
 		mav.setViewName("thing/thingView");
-		
+
 		return mav;
 	}
-	
+
 	@RequestMapping("/thing/sell.do")
 	public ModelAndView sell(ModelAndView mav, Regist regist, HttpServletRequest req,
-			@RequestParam(name="upFile",required=false) MultipartFile [] upFiles) {
+			@RequestParam(name = "upFile", required = false) MultipartFile[] upFiles) {
 		logger.debug(regist);
 		logger.debug(upFiles);
-		for(int i = 0 ; i<upFiles.length ; i++) {			
-			logger.debug("fileName="+upFiles[i].getOriginalFilename());
-			logger.debug("size="+upFiles[i].getSize());
+		for (int i = 0; i < upFiles.length; i++) {
+			logger.debug("fileName=" + upFiles[i].getOriginalFilename());
+			logger.debug("size=" + upFiles[i].getSize());
 		}
-		
-		try{
-			//1. 파일업로드
+
+		try {
+			// 1. 파일업로드
 			String saveDirectory = req.getSession().getServletContext().getRealPath("/resources/upload/thing");
-			logger.debug("saveDirectory = "+saveDirectory);
-			
-			
-			//MultipartFile 처리
+			logger.debug("saveDirectory = " + saveDirectory);
+
+			// MultipartFile 처리
 			String originalName = null;
 			String realName = null;
-			
-			for(MultipartFile f : upFiles) {
-				if(!f.isEmpty()) {
-					//파일명(업로드)
+
+			for (MultipartFile f : upFiles) {
+				if (!f.isEmpty()) {
+					// 파일명(업로드)
 					String originalFileName = f.getOriginalFilename();
 					regist.setRegistImage(originalFileName);
-					
-					if(originalName != null)
+
+					if (originalName != null)
 						originalName = originalName + "," + originalFileName;
 					else
 						originalName = originalFileName;
-					
-					//파일명(서버저장용)
+
+					// 파일명(서버저장용)
 					String renamedFileName = Utils.getRenamedFileName(originalFileName);
 					regist.setRegistRealImage(renamedFileName);
-					
-					if(realName !=null)
+
+					if (realName != null)
 						realName = realName + "," + renamedFileName;
 					else
 						realName = renamedFileName;
-					
-					logger.debug("renamedFileName ="+renamedFileName);
-					//실제 서버에 파일저장
+
+					logger.debug("renamedFileName =" + renamedFileName);
+					// 실제 서버에 파일저장
 					try {
-						f.transferTo(new File(saveDirectory+"/"+renamedFileName));
+						f.transferTo(new File(saveDirectory + "/" + renamedFileName));
 					} catch (IllegalStateException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
 			}
 			regist.setRegistImage(originalName);
 			regist.setRegistRealImage(realName);
-			
-			
-			//2. 업무로직
-			System.out.println("regist@Controller="+regist);
-			int result=thingService.sell(regist);
-			
-			//3. 뷰단처리
+
+			// 2. 업무로직
+			int result = thingService.sell(regist);
+
+			// 3. 뷰단처리
 			String loc = "/";
 			String msg = "";
-			
-			if(result>0) {
+
+			if (result > 0) {
 				msg = "게시물 등록 성공";
-			}else {
-				msg= "게시물 등록 실패";
+			} else {
+				msg = "게시물 등록 실패";
 			}
-			
+
 			mav.addObject("loc", loc);
 			mav.addObject("msg", msg);
 			mav.setViewName("thing/thingView");
-		} catch(Exception e) {
-			logger.error("게시물 등록 에러",e);
-			throw new BoardException("게시물 등록 에러",e);
+		} catch (Exception e) {
+			logger.error("게시물 등록 에러", e);
+			throw new BoardException("게시물 등록 에러", e);
 		}
-	
-	return mav;
-		
+		return mav;
 	}
-	
 
-	@RequestMapping(value="/item/perchase/{productNo}", method=RequestMethod.GET)
-	public ModelAndView movePerchase(@PathVariable("productNo") int productNo,
-							ModelAndView mav,HttpSession session) {
-		
+	@RequestMapping(value = "/item/perchase/{productNo}", method = RequestMethod.GET)
+	public ModelAndView movePerchase(@PathVariable("productNo") int productNo, ModelAndView mav, HttpSession session) {
+
 		Member m = (Member) session.getAttribute("memberLoggedIn");
 		Product p = thingService.selectOne(productNo);
 		logger.debug(m);
-		
+
 		mav.addObject("member", m);
-		mav.addObject("product",p);
+		mav.addObject("product", p);
 		mav.setViewName("item/perchase");
-		
+
 		return mav;
 	}
-	
-	@RequestMapping(value="/item/perchase/complete", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/item/perchase/complete", method = RequestMethod.POST)
 	public ModelAndView paymentComplete(ModelAndView mav, @RequestBody Order order) {
-		
+
 		logger.debug(order);
-		int nProductNo = order.getSeqProductNo(); 
+		int nProductNo = order.getSeqProductNo();
 		int seqMemberNo = order.getSeqMemberNo();
 		String coupon = order.getOrderCoupon();
 		logger.debug(coupon);
 		int couponL = 0;
-		if("0.05".equals(coupon)) {
+		if ("0.05".equals(coupon)) {
 			couponL = 1;
-		}else if("0.1".equals(coupon)) {
+		} else if ("0.1".equals(coupon)) {
 			couponL = 2;
-		}else if("0.15".equals(coupon)) {
+		} else if ("0.15".equals(coupon)) {
 			couponL = 3;
 		}
 		logger.debug(couponL);
 		Map<String, Object> map = new HashMap<>();
-		map.put("seqMemberNo",seqMemberNo);
-		map.put("nProductNo",nProductNo);
-		map.put("couponL",couponL);
-		
-		
+		map.put("seqMemberNo", seqMemberNo);
+		map.put("nProductNo", nProductNo);
+		map.put("couponL", couponL);
+
 		thingService.insertOrder(order);
 		thingService.updateOnSale(map);
-		if(coupon != null) {
-		thingService.updateCoupon(map);
+		if (coupon != null) {
+			thingService.updateCoupon(map);
 		}
 		mav.addObject("order", order);
 		mav.setViewName("redirect:/mypage/purchases.do");
-		
+
 		return mav;
 	}
-	
-	
-	
-	
-	
+
 }

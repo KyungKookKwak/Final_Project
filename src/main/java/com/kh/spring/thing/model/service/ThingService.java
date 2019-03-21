@@ -3,7 +3,7 @@ package com.kh.spring.thing.model.service;
 import java.util.List;
 import java.util.Map;
 
-import com.kh.spring.thing.model.vo.Category;
+import com.kh.spring.category.model.vo.Category;
 import com.kh.spring.thing.model.vo.Order;
 import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.Regist;

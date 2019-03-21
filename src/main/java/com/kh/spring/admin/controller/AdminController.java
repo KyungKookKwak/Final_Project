@@ -16,33 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.auction.model.vo.Auction;
-import com.kh.spring.thing.model.vo.Category;
-import com.kh.spring.thing.model.vo.CategoryMacro;
+import com.kh.spring.category.model.vo.Category;
+import com.kh.spring.category.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.Regist;
 
-
-/**
- * @controller클래스 메소드가 가질 수 있는 파라미터
- * - HttpServletRequest
- * - HttpServletResponse
- * - HttpSession <- 가져올 필요없이 바로 사용이 가능하다.
- * 
- * - InputStream/Reader : 요청에 대한 입력
- * - OutputStream/Writer : 응답에 대한 출력
- * 
- * - @PathVariable
- * - @RequestParam
- * - @RequestHeader
- * - @CookieValue
- * - @RequestBody
- * 
- * - Map , Model , ModelMap : 뷰에 전달할 Model데이터
- * - Command객체 - vo객체
- * - Error , BindingResult : 유효성 검사 관련 객체
- * - SessionStatus : 세션 관리 객체
- * - java.util.Locale : 서버의 지역정보
- *
- */
 
 @Controller
 public class AdminController {
@@ -181,8 +158,6 @@ public class AdminController {
 	public int deleteCoupon(@RequestParam(value="seqcouponNo")int seqcouponNo,
 			@RequestParam(value="memberNo")int memberNo) {
 		int result = 0;
-		//logger.debug("deleteCoupon메소드 실행!!");
-		//logger.debug(seqcouponNo+","+memberNo);
 		Map<String, Object> map = new HashMap<>();
 		map.put("seqcouponNo",seqcouponNo);
 		map.put("memberNo",memberNo);
@@ -332,16 +307,6 @@ public class AdminController {
 		mav.setViewName("admin/regist");
 		return mav;
 	}
-	
-	/*
-	@RequestMapping(value="/admin/regist.do")
-	@ResponseBody
-	public List<Map<String, Object>> regist() {
-		//logger.debug("regist메소드 실행!!");
-		List<Map<String, Object>> list = adminService.regist();
-		//logger.debug(list);
-		return list;
-	}*/
 	
 	@RequestMapping("/admin/category.do")
 	public ModelAndView category(ModelAndView mav 
@@ -701,10 +666,5 @@ public class AdminController {
 		return list;
 		
 	}
-	
-
-	
-	
-	
 	
 }

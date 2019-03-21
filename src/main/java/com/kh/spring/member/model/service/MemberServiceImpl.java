@@ -35,47 +35,34 @@ public class MemberServiceImpl implements MemberService {
 	public List<Map<String, String>> selectAllCategory() {
 		return memberDao.selectAllCategory();
 	}
-
 	
 	@Override
 	public int insertFacebookMember(Member m) {
-		
 		return memberDao.insertFaceBookMember(m);
 	}
 
 	@Override
-	public int insertMember(ModelAndView mav) {
-		
-		return 0;
-	}
-
-	@Override
 	public Member selectOneFBMember(String fbIdcheck) {
-		
 		return memberDao.selectOneFBMember(fbIdcheck);
 	}
 
 	@Override
 	public Member selectOnekakaoMember(String kIdcheck) {
-		
 		return memberDao.selectOnekakaoMember(kIdcheck);
 	}
 
 	@Override
 	public int insertKakaoMember(Member m) {
-		
 		return memberDao.insertKakaoMember(m);
 	}
 
 	@Override
 	public int insertgoogleMember(Member m) {
-		
 		return memberDao.insertgoogleMember(m);
 	}
 
 	@Override
 	public Member selectOnegoogleMember(String gIdcheck) {
-		
 		return memberDao.selectOnegoogleMember(gIdcheck);
 	}
 
@@ -103,7 +90,5 @@ public class MemberServiceImpl implements MemberService {
 	public int updateItr(Map<String, String> map) {
 		return memberDao.updateItr(map);
 	}
-
-	
 
 }

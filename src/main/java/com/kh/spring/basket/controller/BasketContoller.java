@@ -1,6 +1,5 @@
 package com.kh.spring.basket.controller;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,117 +21,95 @@ import com.kh.spring.member.model.vo.Member;
 
 @Controller
 public class BasketContoller {
-	
+
 	Logger logger = Logger.getLogger(getClass());
 
 	@Autowired
 	BasketService basketService;
 
-	  @RequestMapping("/item/basket.do")
-       public ModelAndView selectBasketList(ModelAndView mav, HttpServletRequest request) {
-		  	  
-		      int memberNo =Integer.parseInt((request.getParameter("memberNo")));
-		      System.out.println("memberNo:"+memberNo);
-		      
-	
-		      Basket b = new Basket(); 
-		      b.setSeqMemberNo(memberNo);
-		      
-		     List<Map<String, String>> list = basketService.selectProductList(b);
-		     System.out.println(list != null?"갖고오기성공":"갖고오기실패");
+	@RequestMapping("/item/basket.do")
+	public ModelAndView selectBasketList(ModelAndView mav, HttpServletRequest request) {
 
-		   //  List<Map<String, String>> sumList= basketService.selectSumProduct(b);
-		     int sum = 0;
-		     
-		     for(Map<String,String> map : list) {
-		    	 sum += Integer.parseInt(String.valueOf(map.get("PRODUCT_PRICE")));
-		     }
-		     
-		 
-		      mav.addObject("sum", sum);
-	          mav.addObject("list",list);
-		      mav.setViewName("item/basket"); 
-	          return mav;
-	  }
-	 
-	
-  
-	  
+		int memberNo = Integer.parseInt((request.getParameter("memberNo")));
 
-	
-	 @RequestMapping("/item/insertbasket.do")
-	 public ModelAndView insertBasket(ModelAndView mav,@RequestParam("seqMemberNo") int seqMemberNo
-	  ,@RequestParam("seqProductNo") int seqProductNo ) {
-	  
-	 
-	  Basket b = new Basket(); b.setSeqMemberNo(seqMemberNo);
-	  b.setSeqProductNo(seqProductNo);
-	 
-	  basketService.insertBasket(b); 
-	  mav.setViewName("item/basket");
-	  
-	  return mav; 
-	  
-	 
-	 }
-	 
-		@RequestMapping("/item/checkBasket.do")
-		@ResponseBody
-		public Map<Object, Object> checkBasket(@RequestParam("seqMemberNo") int seqMemberNo
-				 ,@RequestParam("seqProductNo") int seqProductNo) {
+		Basket b = new Basket();
+		b.setSeqMemberNo(memberNo);
 
-			Map<Object,Object > map = new HashMap<>();
-			Basket b = new Basket(); 
-			b.setSeqMemberNo(seqMemberNo);
-			b.setSeqProductNo(seqProductNo); 
-		    b = basketService.selectOneBasket(b); 
-		    boolean basketisUsable = b == null ? true : false;
-		   if(basketisUsable==true) {
-			   b = new Basket(); 
-			   b.setSeqMemberNo(seqMemberNo);
-			   b.setSeqProductNo(seqProductNo);
-			   basketService.insertBasket(b);
-		   }
-		   
-		   
-		   
-		    map.put("basketisUsable",basketisUsable);
-		 
-	       return map;
+		List<Map<String, String>> list = basketService.selectProductList(b);
 
+		int sum = 0;
+
+		for (Map<String, String> map : list) {
+			sum += Integer.parseInt(String.valueOf(map.get("PRODUCT_PRICE")));
 		}
-	  
-    
-   
-    @RequestMapping("/item/deleteBasket.do")
-    public ModelAndView deleteBasket(ModelAndView mav,@RequestParam("no") int no, @RequestParam("memberNo") int memberNo){
-    	
-    	
-    	Basket b = new Basket();
-    	b.setSeqBasketNo(no);
-    	b.setSeqMemberNo(memberNo);
- 	   
-    	
- 	     int rusult= basketService.deleteBasket(b);
- 	  
- 	     List<Map<String, String>> list = basketService.selectProductList(b);
- 	    
- 	     int sum = 0;
-	     for(Map<String,String> map : list) {
-	    	 sum += Integer.parseInt(String.valueOf(map.get("PRODUCT_PRICE")));
-	     }
-	     mav.addObject("sum", sum);
-         mav.addObject("list",list);
- 	     
- 	     mav.setViewName("/item/basket"); 
-		 return mav;
-    	
 
-    }
+		mav.addObject("sum", sum);
+		mav.addObject("list", list);
+		mav.setViewName("item/basket");
+		return mav;
+	}
 
+	@RequestMapping("/item/insertbasket.do")
+	public ModelAndView insertBasket(ModelAndView mav, @RequestParam("seqMemberNo") int seqMemberNo,
+			@RequestParam("seqProductNo") int seqProductNo) {
 
+		Basket b = new Basket();
+		b.setSeqMemberNo(seqMemberNo);
+		b.setSeqProductNo(seqProductNo);
 
-		
-	 
+		basketService.insertBasket(b);
+		mav.setViewName("item/basket");
+
+		return mav;
+
+	}
+
+	@RequestMapping("/item/checkBasket.do")
+	@ResponseBody
+	public Map<Object, Object> checkBasket(@RequestParam("seqMemberNo") int seqMemberNo,
+			@RequestParam("seqProductNo") int seqProductNo) {
+
+		Map<Object, Object> map = new HashMap<>();
+		Basket b = new Basket();
+		b.setSeqMemberNo(seqMemberNo);
+		b.setSeqProductNo(seqProductNo);
+		b = basketService.selectOneBasket(b);
+		boolean basketisUsable = b == null ? true : false;
+		if (basketisUsable == true) {
+			b = new Basket();
+			b.setSeqMemberNo(seqMemberNo);
+			b.setSeqProductNo(seqProductNo);
+			basketService.insertBasket(b);
+		}
+
+		map.put("basketisUsable", basketisUsable);
+
+		return map;
+
+	}
+
+	@RequestMapping("/item/deleteBasket.do")
+	public ModelAndView deleteBasket(ModelAndView mav, @RequestParam("no") int no,
+			@RequestParam("memberNo") int memberNo) {
+
+		Basket b = new Basket();
+		b.setSeqBasketNo(no);
+		b.setSeqMemberNo(memberNo);
+
+		int rusult = basketService.deleteBasket(b);
+
+		List<Map<String, String>> list = basketService.selectProductList(b);
+
+		int sum = 0;
+		for (Map<String, String> map : list) {
+			sum += Integer.parseInt(String.valueOf(map.get("PRODUCT_PRICE")));
+		}
+		mav.addObject("sum", sum);
+		mav.addObject("list", list);
+
+		mav.setViewName("/item/basket");
+		return mav;
+
+	}
 
 }

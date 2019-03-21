@@ -6,7 +6,7 @@
 
 <fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="" name="pageTitle" />
+	<jsp:param value="Get It :: 고객센터" name="pageTitle" />
 </jsp:include>
 <style>
 .content-container {

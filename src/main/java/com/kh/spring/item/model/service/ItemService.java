@@ -4,7 +4,6 @@ import java.util.Map;
 
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
-import com.kh.spring.thing.model.vo.ProductAsk;
 import com.kh.spring.thing.model.vo.Regist;
 
 public interface ItemService {
@@ -12,8 +11,6 @@ public interface ItemService {
 	Product selectOneProduct(int num);
 
 	Member selectJoinMember(int sellerNo);
-
-	int insertAsk(ProductAsk pAsk);
 
 	void updateProduct(Map<String, String> map);
 
@@ -26,8 +23,6 @@ public interface ItemService {
 	List<Product> selectNew();
 
 	List<Product> selectNowProduct(Map<String, String> map);
-
-	List<ProductAsk> selectAskAll(int productNo);
 
 	List<Product> selectUpItems();
 

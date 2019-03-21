@@ -1,0 +1,54 @@
+@charset "UTF-8";
+.content-container{
+	height: 100%;
+}
+.productOne, .auctionOne{
+	width: 250px;
+	height: 250px;
+	text-align: center;
+	display: inline-block;
+	margin: 10px 31px;
+}
+.productOne:hover, .auctionOne:hover{
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px 7px lightgray;
+	cursor: pointer;
+}
+.noProduct{
+	text-align: center;
+	font-size: 30px;
+	margin-top: 20%;
+}
+.pImg{
+	margin-top: 5px;
+	width: 250px;
+	height: 180px;
+}
+.category-box>h2{
+	margin-left: 30px;
+	font-family: 'Do Hyeon', sans-serif;
+}
+.category-name{
+	padding-left: 60px;
+}
+.category-name span{
+	font-size: 20px;
+	font-family: 'Jua', sans-serif;
+}
+#enrollItr{
+	border: none;
+	border-radius: 5px;
+	background-color: orange;
+	animation-name: myani2;
+    animation-duration: .5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@Keyframes myani2{
+	0%{
+		transform: rotate(15deg);
+	}
+	100%{
+		transform: rotate(-15deg);
+	}
+}

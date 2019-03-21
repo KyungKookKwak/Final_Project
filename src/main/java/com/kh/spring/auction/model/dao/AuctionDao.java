@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.spring.auction.model.vo.Auction;
-import com.kh.spring.thing.model.vo.CategoryMacro;
+import com.kh.spring.category.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.Product;
 
 public interface AuctionDao {

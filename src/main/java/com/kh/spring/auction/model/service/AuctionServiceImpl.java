@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.auction.model.dao.AuctionDao;
 import com.kh.spring.auction.model.vo.Auction;
-import com.kh.spring.thing.model.vo.CategoryMacro;
+import com.kh.spring.category.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.Product;
 
 @Service

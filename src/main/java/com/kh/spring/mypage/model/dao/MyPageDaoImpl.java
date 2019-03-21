@@ -19,27 +19,13 @@ public class MyPageDaoImpl implements MyPageDao {
 
 	@Override
 	public int updatephone(Member m) {
-		int result = 0;
-		result = SqlSession.update("mypage.updatephone",m);
-		return result;
+		return SqlSession.update("mypage.updatephone",m);
 	}
 
 	@Override
 	public int updateemail(Member m) {
-		int result = 0;
-		result = SqlSession.update("mypage.updateemail",m);
-		return result;
+		return SqlSession.update("mypage.updateemail",m);
 	}
-
-	/*
-	 * @Override public List<Map<String, Object>> sellList(int seqMemberNo) {
-	 * List<Map<String, Object>> list =
-	 * SqlSession.selectList("mypage.sellList",seqMemberNo); return list; }
-	 * 
-	 * @Override public List<Map<String, Object>> sellList2(int seqMemberNo) {
-	 * List<Map<String, Object>> list =
-	 * SqlSession.selectList("mypage.sellList2",seqMemberNo); return list; }
-	 */
 
 	@Override
 	public List<Map<String, Object>> sellList(int seqMemberNo, int cPage, int numPerPage) {
@@ -98,9 +84,7 @@ public class MyPageDaoImpl implements MyPageDao {
 
 	@Override
 	public int updateaddress(Member m) {
-		int result = 0;
-		result = SqlSession.update("mypage.updateaddress",m);
-		return result;
+		return SqlSession.update("mypage.updateaddress",m);
 	}
 	@Override
 	public List<Map<String, Object>> coupons(int memberNo) {

@@ -34,8 +34,5 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Product> selectByCategory(Map<String, String> map) {
 		return categoryDao.selectByCategory(map);
 	}
-
-	
-	
 	
 }

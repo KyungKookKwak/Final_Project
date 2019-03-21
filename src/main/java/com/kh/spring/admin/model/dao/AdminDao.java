@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.spring.auction.model.vo.Auction;
+import com.kh.spring.category.model.vo.Category;
+import com.kh.spring.category.model.vo.CategoryMacro;
 import com.kh.spring.member.model.vo.Member;
-import com.kh.spring.thing.model.vo.Category;
-import com.kh.spring.thing.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.ProductIo;
 import com.kh.spring.thing.model.vo.Regist;
 

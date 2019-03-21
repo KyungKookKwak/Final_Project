@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
-import com.kh.spring.thing.model.vo.ProductAsk;
 import com.kh.spring.thing.model.vo.Regist;
 
 @Repository
@@ -28,11 +27,6 @@ public class ItemDaoImpl implements ItemDao {
 	public Member selectJoinMember(int sellerNo) {
 		Member m = sqlSession.selectOne("basket.selectJoinMember", sellerNo);
 		return m;
-	}
-
-	@Override
-	public int insertAsk(ProductAsk pAsk) {
-		return sqlSession.insert("basket.insertAsk",pAsk);
 	}
 
 	@Override
@@ -66,11 +60,6 @@ public class ItemDaoImpl implements ItemDao {
 	}
 
 	@Override
-	public List<ProductAsk> selectAskAll(int productNo) {
-		return sqlSession.selectList("basket.selectAskAll",productNo);
-	}
-
-	@Override
 	public List<Product> selectUpItems() {
 		return sqlSession.selectList("basket.selectUpItems");
 	}
@@ -90,9 +79,4 @@ public class ItemDaoImpl implements ItemDao {
 		return sqlSession.selectList("basket.couponList",buyerNo);
 	}
 
-	
-
-	
-
-	
 }

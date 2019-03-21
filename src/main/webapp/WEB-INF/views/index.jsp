@@ -6,213 +6,12 @@
 
 <fmt:requestEncoding value="UTF-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="안녕 스프링!" name="pageTitle" />
+	<jsp:param value="Get It :: 중고거래의 중심" name="pageTitle" />
 </jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/index.css" />
+
 <c:set scope="application" var="allCategory" value="${categoryList }" />
 
-<style>
-.indexphoto {
-	width: 100%;
-	height: 300px;
-}
-
-#favorite{
-	width: 80%;
-	margin: 0 auto;
-}
-#fimages{
-	display: flex;
-	justify-content: space-between;
-}
-#fimages a{
-	text-align: center;
-}
-#fimages a img{
-	width: 120px;
-	height: 100px;
-	display: block;
-}
-#favorite a{
-	text-decoration: none;
-}
-.popular{
-	font-family: 'Nanum Gothic', sans-serif;
-	margin-top: 30px;
-}
-.popular>h3{
-	margin-left: 30px;
-}
-#sell_ {
-    border: 2px solid lightgray;
-    height: 180px;
-    width:95%;
-    margin-left:25px;
-    margin-top: 20px;
-}
-#sell2 {
-	position: relative;
-	bottom: 90px;
-	right: 80px;
-	float: right;
-	border: 1px solid gray;
-	background: rgb(103, 105, 201);
-	color: white;
-	width: 300px;
-	height: 88px;
-	text-align: center;
-	padding: 30px;
-}
-.font_ {
-	margin-left: 50px;
-}
-#box0{
-	margin-top: 20px;
-	width:100%;
-	display: flex;
-	justify-content: space-around;
-}
-
-#box1 {
-	display: inline-block;
-	vertical-align: top;
-    width: 19%;
-	height: 150px;
-	border: 1px solid #dbdbdb;
-	margin-left:3%;
-}
-
-#box2 {
-	display: inline-block;
-	vertical-align: top;
-	width: 22%;
-}
-#box3 {
-	width: 30% !important;
-}
-.hm-good {
-	display: inline-block;
-    width: 241px;
-    height: 344px;
-    padding: 8px 18px;
-}
-
-.gdidx-img img {
-    width: 234px;
-    height: 234px;
-}
-
-.gdidx-name {
-    height: 42px;
-    line-height: 21px;
-    font-size: 14px;
-    color: #1f1f1f;
-    margin-bottom: 12px;
-}
-
-.gdidx-prices-wrapper {
-    height: 38px;
-    margin-bottom: 20px;
-}
-
-.gdidx-good-info {
-    display: block;
-    height: 364px;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.gdidx-price {
-    color: #1f1f1f;
-    font-size: 20px;
-    line-height: 22px;
-    font-weight: bold;
-}
-
-.gdidx-original-price {
-    color: #c2c2c2;
-    font-size: 14px;
-    line-height: 16px;
-    margin-top: 2px;
-    text-decoration: line-through;
-}
-#infoBox{
-	width: 900px;
-	text-align: center;
-	transform: translate(5%,0%);
-}
-.productOne{
-	width: 250px;
-	height: 250px;
-	text-align: center;
-	display: inline-block;
-	margin: 10px 31px;
-}
-#moreItems{
-	float: right;
-	margin-right: 100px;
-	cursor: pointer;
-	font-size: 20px;
-}
-#moreItems:hover{
-	background-color: yellow;
-	border-radius: 7px;
-	box-shadow: 0px 0px 3px 5px yellow;
-}
-#moreItems1{
-	float: right;
-	margin-right: 100px;
-	cursor: pointer;
-	font-size: 20px;
-}
-#moreItems1:hover{
-	background-color: yellow;
-	border-radius: 7px;
-	box-shadow: 0px 0px 3px 5px yellow;
-}
-.productOne:hover{
-	border-radius: 5px;
-	box-shadow: 3px 3px 5px 7px lightgray;
-	cursor: pointer;
-}
-.pImg{
-	margin-top: 5px;
-	width: 250px;
-	height: 180px;
-}
-
-.blinkEle1 , .blinkEle2 , .blinkEle3 , .blinkEle4{
-	visibility: hidden;
-}
-
-.myblinkEle1 , .myblinkEle2 , .myblinkEle3 , .myblinkEle4{
-	visibility: hidden;
-}
-.badge{
-	animation-name: myani1;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-fill-mode: forwards;
-}
-@Keyframes myani1{
-        0%{
-            background-color: blue;
-        }
-        50%{
-            background-color: red;
-        }
-        80%{
-            transform: rotateY(360deg);
-        }
-        100%{
-            background-color: blueviolet;
-            border-radius: 50%;
-        }
-    }
-</style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
 	data-ride="carousel">
 	<div class="carousel-inner">
@@ -378,7 +177,6 @@ a {
 </div>
 
 <hr>
-
 <script>
 /* 현재 시간을 구하는 함수 */
 function getTime() {
@@ -477,12 +275,7 @@ function addComma(num) {
 	var regexp = /\B(?=(\d{3})+(?!\d))/g;
 	return num.toString().replace(regexp, ',');
 }
-/* 
-setInterval(function(){
-	for(var i = 1; i <= 4;i++) {
-	  $(".blinkEle"+i).toggle();
-	}
-}, 500); */
+
 	
 $("#moreItems").on('click',function(){
 	location.href = "${pageContext.request.contextPath}/item/brandNew";
@@ -497,15 +290,4 @@ $(".productOne").each(function(item, idx){
 	});
 });
 </script>
-<style>
-.auctionIng {
-	color: red;
-	font-weight: bold;
-}
-
-.auctionIn{
-	color: #7151FC;
-	font-weight: bold;
-}
-</style>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

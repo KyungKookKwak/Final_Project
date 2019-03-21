@@ -26,7 +26,6 @@ import com.kh.spring.common.naverapi.NaverApi;
 import com.kh.spring.item.model.service.ItemService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
-import com.kh.spring.thing.model.vo.ProductAsk;
 import com.kh.spring.thing.model.vo.Regist;
 
 @Controller
@@ -65,35 +64,6 @@ public class ItemController {
 		return mav;
 	}
 	
-	@RequestMapping("/item/ask")
-	public void productAsk(@RequestParam(value="askContent") String askContent, HttpServletResponse response,
-						@RequestParam(value="asker") int asker,
-						@RequestParam(value="productNo") int productNo) throws JsonIOException, IOException {
-		logger.debug(askContent+"/"+asker);
-
-		ProductAsk pAsk = new ProductAsk();
-		pAsk.setAskUser(asker);
-		pAsk.setAskContent(askContent);
-		pAsk.setSeqProductNo(productNo);
-		
-		int result = itemService.insertAsk(pAsk);
-		int askNo = pAsk.getSeqAskNo();
-		
-		Map<String,String> map = new HashMap<>();
-		map.put("askNo", String.valueOf(askNo));
-		map.put("productNo",String.valueOf(productNo));
-		
-		itemService.updateProduct(map);
-		Member m = itemService.selectJoinMember(asker);
-		//이 리스트를 넘겨야 한다아아아아아아아아아아..............03.07 -ing.
-		List<ProductAsk> list = itemService.selectAskAll(productNo);
-		
-		map.put("asker",m.getMemberId());
-		map.put("askContent",askContent);
-		
-		response.setContentType("application/json;charset=UTF-8"); 
-		new Gson().toJson(map, response.getWriter());
-	}
 	
 	@RequestMapping("/item/search")
 	public ModelAndView searchItem(ModelAndView mav, @RequestParam(value="searchKeyword", required=false) String searchKeyword) {

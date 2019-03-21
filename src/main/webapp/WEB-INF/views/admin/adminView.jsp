@@ -22,10 +22,6 @@
 </style>
 <section class="adminView-container">
 <img src="${pageContext.request.contextPath }/resources/images/Getitadmin.PNG" width="400px" height="200px" id="image_">
-
-
 </section>
-
-
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

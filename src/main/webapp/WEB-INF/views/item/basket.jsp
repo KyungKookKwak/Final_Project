@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <fmt:requestEncoding value="UTF-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-    <jsp:param value="" name="pageTitle"/>
+    <jsp:param value="Get It :: 장바구니" name="pageTitle"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/mypageSide.jsp"></jsp:include>
 <style>
